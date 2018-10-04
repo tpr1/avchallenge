@@ -1,4 +1,4 @@
-### This Code Simulates an interaction between the ABS and the VCU during the Braking process.
+### This Code Simulates interactions between vehicle ECUs during a specific process (Braking).
 ### instructions on how to make and export a federation on WebGME are described in the following link. 
 https://pages.nist.gov/ucef/development/webgme/plugins/
 ### This federation takes into consideration two federates only. below is the experimentConfig.json used for this experiment .
