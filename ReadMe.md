@@ -1,7 +1,6 @@
 ### This Code Simulates interactions between vehicle ECUs during a specific process (Braking).
 ### instructions on how to make and export a federation on WebGME are described in the following link. 
 https://pages.nist.gov/ucef/development/webgme/plugins/
-### This federation takes into consideration two federates only. below is the experimentConfig.json used for this experiment .
 
 ```
 {
@@ -20,7 +19,7 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
     },
     {
       "federateType": "BMS",
-      "count": 0
+      "count": 1
     },
     {
       "federateType": "DataBase",
@@ -28,11 +27,11 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
     },
     {
       "federateType": "ConsoleLogger",
-      "count": 0
+      "count": 1
     },
     {
       "federateType": "MCU",
-      "count": 0
+      "count": 1
     },
     {
       "federateType": "VCU",
