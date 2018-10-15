@@ -7,8 +7,7 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
   "federateTypesAllowed": [
     "ABS",
     "BMS",
-    "DataBase",
-    "ConsoleLogger",
+    "Database",
     "MCU",
     "VCU"
   ],
@@ -22,11 +21,7 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
       "count": 1
     },
     {
-      "federateType": "DataBase",
-      "count": 1
-    },
-    {
-      "federateType": "ConsoleLogger",
+      "federateType": "Database",
       "count": 1
     },
     {
@@ -48,11 +43,7 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
       "count": 0
     },
     {
-      "federateType": "DataBase",
-      "count": 0
-    },
-    {
-      "federateType": "ConsoleLogger",
+      "federateType": "Database",
       "count": 0
     },
     {
@@ -68,8 +59,7 @@ https://pages.nist.gov/ucef/development/webgme/plugins/
 ```
 ### How to Run : 
 
-- Create the AV folder in home/vagrant/Downloads
-- git clone https://github.com/usnistgov/avchallenge.git
+In "home/vagrant/Downloads" execute this command :  git clone https://github.com/usnistgov/avchallenge.git
 
 ## REST
 ```
@@ -101,19 +91,15 @@ java  -Dlog4j.configurationFile=conf/log4j2.xml -jar ABS-0.1.0-SNAPSHOT.jar  -fe
 cd /home/vagrant/Downloads/AV/AV_generated/AV-java-federates/AV-impl-java/BMS/target
 java  -Dlog4j.configurationFile=conf/log4j2.xml -jar BMS-0.1.0-SNAPSHOT.jar  -federationId=AV -configFile=conf/BMSConfig.json
 ```
-## Logger
-```
-
-cd /home/vagrant/Downloads/AV/AV_generated/AV-java-federates/AV-impl-java/ConsoleLogger/target
-java  -Dlog4j.configurationFile=conf/log4j2.xml -jar ConsoleLogger-0.1.0-SNAPSHOT.jar  -federationId=AV -configFile=conf/ConsoleLoggerConfig.json
-```
-
 
 ## DB
 
 ```
 
-cd /home/vagrant/Downloads/AV/AV_generated/AV-java-federates/AV-impl-java/DataBase/target
-java  -Dlog4j.configurationFile=conf/log4j2.xml -jar DataBase-0.1.0-SNAPSHOT.jar  -federationId=AV -configFile=conf/DataBaseConfig.json
+cd cpswt/ucef-database/target/
+java -jar Database-0.0.1-SNAPSHOT.jar conf/Database.json
+
+    "username": "root",
+    "password": "c2wt",
 
 ```
