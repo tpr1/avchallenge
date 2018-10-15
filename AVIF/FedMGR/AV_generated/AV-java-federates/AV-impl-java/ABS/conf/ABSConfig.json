@@ -1,0 +1,11 @@
+{
+  "federateRTIInitWaitTimeMs": 200,
+  "federateType": "ABS",
+  "federationId": "AV",
+  "isLateJoiner": false,
+  "lookAhead": 0.2,
+  "stepSize": 1.0,
+  "ABSWS": "77",
+  "numberOfInputs": 44,
+  "maxValue": 33.0
+}
