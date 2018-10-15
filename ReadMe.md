@@ -1,4 +1,4 @@
-### This Code Simulates interactions between vehicle ECUs during a specific process (Braking).
+### This Code Simulates interactions between vehicle ECUs during a specific process (Braking, Acceleration, ..).
 ### instructions on how to make and export a federation on WebGME are described in the following link. 
 https://pages.nist.gov/ucef/development/webgme/plugins/
 
