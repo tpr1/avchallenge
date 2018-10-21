@@ -1,13 +1,11 @@
-AV_Parameters_Initialization
-
 # This guide describes how to add and initialize custom parameters to an object-based federate.
 
-The Simple Adder project (https://github.com/usnistgov/ucef-samples/tree/develop/SimpleAdder) implements the
+The Simple Adder project (https://github.com/usnistgov/ucef-samples/tree/develop/SimpleAdder) implements the 
 methods we describe in this tutorial and we're leveraging its implementation to bring custom parameters initialization to the AV project.
 
-Let's pick the ABS federate from the AV Federation to implement custom parameters initialization:
+Let's pick the ABS federate from the AV Federation to implement custom parameters initialization:  
 
-We need to modify and/or Create the following 3 files :
+We need to modify and/or Create the following 3 files : 
 
 1) avchallenge/AVIF/Federates/ABS_generated/ABS-java-federates/ABS-impl-java/ABS/conf/ABSConfig.json
 2) avchallenge/AVIF/Federates/ABS_generated/ABS-java-federates/ABS-impl-java/ABS/src/main/java/ABS/ABSConfig.java
@@ -17,7 +15,7 @@ We need to modify and/or Create the following 3 files :
 ## ABSConfig.json
 
 
-### the ABSConfig.json file contains the old and new parameters initialized. It should be defined in the pom.xml files below :
+### the ABSConfig.json file contains the old and new parameters initialized. It should be defined in the pom.xml files below : 
 
 ```
 .avchallenge/AVIF/Federates/ABS_generated/ABS-java-federates/ABS-impl-java/ABS/pom.xml:20:        <configFile>ABSConfig.json</configFile>
@@ -37,7 +35,7 @@ We need to modify and/or Create the following 3 files :
 
 ### The parametrs above are pre-defined in the FederateConfig class by default.
 
-After adding our custom values to the file we end up with the follwing :
+After adding our custom values to the file we end up with the follwing : 
 
 
 ABSConfig.jsob
@@ -52,10 +50,10 @@ ABSConfig.jsob
 "Wheel_Speed": "88",
 "Vehicle_Speed": "88",
 "ABS_Event_Status":"placeholder",
-"Traction_Stability_Torque_Request":"placeholder",
-"VCU_Motor_Torque" : "placeholder",
+"Traction_Stability_Torque_Request":"placeholder",   
+"VCU_Motor_Torque" : "placeholder", 
 "VCU_PGN" : "placeholder",
-"Wheel_Speed_Sensors":"placeholder",
+"Wheel_Speed_Sensors":"placeholder", 
 "Hydraulic_Valve_Commands":"placeholder",
 "ABSPGN" : "ABS",
 "ABSSPNs" :   "placeholder",
@@ -66,14 +64,14 @@ ABSConfig.jsob
 
 ### The added parameters must be defined as well, and that's where ABSConfig.java file comes handy : It extends from the FederateConfig Class.
 
-## ABSConfig.java
+## ABSConfig.java 
 
 
 ### After adding the custom parameters to the json file, we need to Declare them in the ABSConfig.java file as well.
 Each custom parameter must be declared as a public variable with the following annotation : @FederateParameter.
 
 
-### Our ABSConfig.java file will look like this :
+### Our ABSConfig.java file will look like this : 
 
 
 ABSConfig.json
@@ -92,10 +90,10 @@ public class ABSConfig extends FederateConfig {
     public String ABS_Event_Status;   // pgn ?    SPN ?
     // J1931-71 NON-compliant local Messages
     @FederateParameter
-    public String Traction_Stability_Torque_Request;
+    public String Traction_Stability_Torque_Request;   
     // J1931-71 compliant external Messages : (ExtrenalEntity_Message)
     @FederateParameter
-    public String VCU_Motor_Torque;
+    public String VCU_Motor_Torque; 
     @FederateParameter
     public String VCU_PGN ;
    // Messages sent/received to/from actuators/sensors
@@ -106,9 +104,9 @@ public class ABSConfig extends FederateConfig {
    // PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
     @FederateParameter
     public  String ABSPGN;
-   // SPNs
+   // SPNs 
     @FederateParameter
-    public String ABSSPNs;
+    public String ABSSPNs; 
     @FederateParameter
     public String Vehicle_Speed;
 }
@@ -119,7 +117,7 @@ public class ABSConfig extends FederateConfig {
 
 
 ## ABS.java
-
+ 
 Now that we have declared the new variables in ABSConfig.java and we have initialized them, Let's call these configuration file within the ABS.java ABS Federate source file.
 
 ### In the ABS.java file below we highlight the lines where a change should be made with a [Number] sign at the beggining of the line and we explain the change to be made with comments.
@@ -150,20 +148,20 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  */
 public class ABS extends ABSBase {
-
-
+    
+	
 	/* definition & initialization block */
-
+	
 	public final static Logger log = LogManager.getLogger();
     public double currentTime = 0;
+    
 
-
-
+   
 // [1]  call an instance of the config file. This instance will be called each time we want to update / initializa our variables.
 
         public ABSConfig ABSparameter = new ABSConfig();
 
-// [2]     create an instance of the CAN object.
+// [2]     create an instance of the CAN object. 
 
         CAN AbsCAN = new CAN();
 
@@ -174,96 +172,96 @@ public class ABS extends ABSBase {
 
 // [4] register the CAN instance (AbsCAN)
 
-        AbsCAN.registerObject(getLRC());
+        AbsCAN.registerObject(getLRC());             
 
-// [5] initialize the parameters.
+// [5] initialize the parameters. 
 
-
-         ABSparameter.placeholder= params.placeholder;
+              
+         ABSparameter.placeholder= params.placeholder;  
          ABSparameter.ST= params.ST;
          ABSparameter.Wheel_Speed= params.Wheel_Speed;
-         ABSparameter.ABS_Event_Status= params.ABS_Event_Status;
-         ABSparameter.Traction_Stability_Torque_Request= params.Traction_Stability_Torque_Request;
-         ABSparameter.VCU_Motor_Torque= params.VCU_Motor_Torque;
+         ABSparameter.ABS_Event_Status= params.ABS_Event_Status; 
+         ABSparameter.Traction_Stability_Torque_Request= params.Traction_Stability_Torque_Request;   
+         ABSparameter.VCU_Motor_Torque= params.VCU_Motor_Torque; 
          ABSparameter.VCU_PGN = params.VCU_PGN;
-         ABSparameter.Wheel_Speed_Sensors= params.Wheel_Speed_Sensors;
+         ABSparameter.Wheel_Speed_Sensors= params.Wheel_Speed_Sensors; 
          ABSparameter.Hydraulic_Valve_Commands= params.Hydraulic_Valve_Commands;
-         ABSparameter.ABSPGN= params.ABSPGN;
-         ABSparameter.ABSSPNs= params.ABSSPNs;
+         ABSparameter.ABSPGN= params.ABSPGN;  
+         ABSparameter.ABSSPNs= params.ABSSPNs; 
          ABSparameter.Vehicle_Speed= params.Vehicle_Speed;
-
+         
     }
 
-
+  
     public void checkReceivedSubscriptions() {
 
         ObjectReflector reflector = null;
         while ((reflector = getNextObjectReflectorNoWait()) != null) {
-
+        	
             reflector.reflect();
             ObjectRoot object = reflector.getObjectRoot();
-            if (object instanceof CAN)
+            if (object instanceof CAN) 
             {
                 handleObjectClass((CAN) object);
             }
-
+            
             else {
-
+            	
                 log.debug("unhandled object reflection: {}", object.getClassName());
-
+                
                  }
         }
     }
 
-
-
-
+     
+    
+    
    public void Wheel_Speed ()
-
+    
     {
-
+    	
 
 	  ABSparameter.Wheel_Speed   = Integer.toString(ThreadLocalRandom.current().nextInt(50,90 + 1));
 
-    }
-
-
-
+    } 
+    
+    
+    
    public void Determine_Brake_Effort()
-
+    
     {
-
-
-
-
+    	
+	   
+	   
+	   
     }
 
    public void Traction_Stability_Torque_Request  ()
-
+    
     {
 	   ABSparameter.Traction_Stability_Torque_Request = Integer.toString(ThreadLocalRandom.current().nextInt(300,400 + 1));
     }
 
-
+    
    public void Friction_brake_control()
-
+   
     {
-
+   
     }
 
 
    public String Build_SPN()
-
+   
    {
 	   return ABSparameter.ABSSPNs= ABSparameter.Wheel_Speed +" "+ ABSparameter.Vehicle_Speed +" "+ ABSparameter.ABS_Event_Status+" " + ABSparameter.Traction_Stability_Torque_Request;
    }
-
+   
    public void Build_and_Send_CAN_Frame(String pgn,String spn)
-
+   
    {
 
-
-
+	
+	   
 	   AbsCAN.set_11BiD(ABSparameter.placeholder);
        AbsCAN.set_18BiD(pgn);
        AbsCAN.set_ACKslot(true);
@@ -279,21 +277,21 @@ public class ABS extends ABSBase {
        AbsCAN.set_SRR(true);
        AbsCAN.set_StartOfFrame(true);
        AbsCAN.updateAttributeValues(getLRC(), currentTime + getLookAhead());
-
+	   
    }
-
-
+   
+   
     public void execute() throws Exception {
-        if(super.isLateJoiner())
-
+        if(super.isLateJoiner()) 
+	
         {
-
+         
          	log.info("turning off time regulation (late joiner)");
             currentTime = super.getLBTS() - super.getLookAhead();
             super.disableTimeRegulation();
-
+         
         }
-
+                
         AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
         putAdvanceTimeRequest(atr);
 
@@ -311,28 +309,28 @@ public class ABS extends ABSBase {
 
         startAdvanceTimeThread();
         log.info("started logical time progression");
-
+        
 
        while (!exitCondition) {
 
             atr.requestSyncStart();
             enteredTimeGrantedState();
-
+            	   
  	 	   int osd = (int)currentTime % 10;
 
     	   switch (osd)
     	   {
-    	   case 0:
-    	   Wheel_Speed ();
+    	   case 0:  
+    	   Wheel_Speed (); 
     	   Build_and_Send_CAN_Frame( ABSparameter.ABSPGN, Build_SPN());
            break;
     	   case 6:
-    	   Traction_Stability_Torque_Request();
+    	   Traction_Stability_Torque_Request(); 
     	   Build_and_Send_CAN_Frame( ABSparameter.ABSPGN, Build_SPN());
-    	         break;
+    	         break;        
     	   }
-
-    	   if (!exitCondition) {
+    	   
+    	   if (!exitCondition) {      
             	currentTime += super.getStepSize();
                 AdvanceTimeRequest newATR = new AdvanceTimeRequest(currentTime);
                 putAdvanceTimeRequest(newATR);
@@ -359,7 +357,7 @@ public static void main(String[] args) {
                 federate.execute();
                 log.info("Done.");
                 System.exit(0);
-        }
+        }          
         catch (Exception e) {
             log.error(e);
             System.exit(1);
@@ -368,3 +366,21 @@ public static void main(String[] args) {
 }
 
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
