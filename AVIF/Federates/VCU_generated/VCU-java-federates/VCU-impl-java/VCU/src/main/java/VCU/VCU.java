@@ -27,86 +27,47 @@ public class VCU extends VCUBase {
     private final static Logger log = LogManager.getLogger();
     private double currentTime = 0;
     
-    public VCUConfig params = new VCUConfig();
+    public VCUConfig VCUparameter = new VCUConfig();
     
-    
-    public String placeholder = "0";
-    public double ST1 = params.ST1;
-    public double ST2 = params.ST2;
-    public double ST3 = params.ST3;
-    public double ST4 = params.ST4;
-    public double ST5 = params.ST5;
-    public double ST6 = params.ST6;
-    public double ST7 = params.ST7;
-    public double ST8 = params.ST8;
-    public double ST9 = params.ST9;
-    public double ST10 = params.ST10;
-    public boolean sendCondition = false;
-
-     // J1931-71 compliant local Messages
-
-    String Motor_Operating_Mode=params.Motor_Operating_Mode; // pgn ? SPN ?
-    String Motor_Torque=params.Motor_Torque; // pgn ? SPN ?
-    String Motor_Speed=params.Motor_Speed; // pgn ? SPN ?
-    String Volt_Cmd=params.Volt_Cmd; // pgn ? SPN ?
-    String Contactor_Override_Commands=params.Contactor_Override_Commands; // pgn ? SPN ?
-    String Battery_Commands=params.Battery_Commands; // pgn ? SPN ?
-    String Torque_Commands=params.Torque_Commands; // pgn ? SPN ?
-    String InverterCoolingAndHeatingCommands=params.InverterCoolingAndHeatingCommands;    // pgn ? SPN ?
-    
-    
-    // initialize parameters
-    
-
-    
-    // J1931-71 compliant external Messages : (ExtrenalEntity_Message)  
-   
-    String MCU_Motor_Temperature = params.MCU_Motor_Temperature;
-    String MCU_Motor_Speed = params.MCU_Motor_Speed;
-    String MCU_Motor_Power_Limits = params.MCU_Motor_Power_Limits;
-    String ABS_Wheel_Speed = params.ABS_Wheel_Speed;
-    String BMS_Peak_Current = params.BMS_Peak_Current;
-    String VCU_Torque_Request = params.VCU_Torque_Request;
-    
-    // J1931-71 NON compliant external Messages : (ExtrenalEntity_Message)  
-    String ABS_Braking_Torque_split = params.ABS_Braking_Torque_split;
-    String ABS_traction_Stability_torque_request = params.ABS_traction_Stability_torque_request;
-    
-    // Messages sent/received to/from actuators/sensors
-    
-String Accel_Pedal_Position=params.Accel_Pedal_Position;
-String Brake_Pressure=params.Brake_Pressure;
-    
-
-
-
-// PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
-
-
-String VCUPGN = params.VCUPGN;
-
-
-// SPNs 
-
-String VCUSPNs = params.VCUSPNs;
-
-    
-    ///////////////////////////////////////////////////////////////////////
-    // TODO Instantiate objects that must be sent every logical time step
-    //
     CAN VcuCAN = new CAN();
-    //
-    ///////////////////////////////////////////////////////////////////////
-
-    public VCU(FederateConfig params) throws Exception {
+    
+    public VCU(VCUConfig params) throws Exception {
         super(params);
 
-        ///////////////////////////////////////////////////////////////////////
-        // TODO Must register object instances after super(args)
-        //
+
        VcuCAN.registerObject(getLRC());
-        //
-        ///////////////////////////////////////////////////////////////////////
+       VCUparameter.placeholder = params.placeholder ; 
+       VCUparameter.ST1 = params.ST1 ; 
+       VCUparameter.ST2 = params.ST2 ; 
+       VCUparameter.ST3 = params.ST3 ; 
+       VCUparameter.ST4 = params.ST4 ; 
+       VCUparameter.ST5 = params.ST5 ; 
+       VCUparameter.ST6 = params.ST6 ; 
+       VCUparameter.ST7 = params.ST7 ; 
+       VCUparameter.ST8 = params.ST8 ; 
+       VCUparameter.ST9 = params.ST9 ; 
+       VCUparameter.ST10 = params.ST10 ; 
+       VCUparameter.Motor_Operating_Mode = params.Motor_Operating_Mode ; 
+       VCUparameter.Motor_Torque = params.Motor_Torque ; 
+       VCUparameter.Motor_Speed = params.Motor_Speed ; 
+       VCUparameter.Volt_Cmd = params.Volt_Cmd ; 
+       VCUparameter.Contactor_Override_Commands = params.Contactor_Override_Commands ; 
+       VCUparameter.Battery_Commands = params.Battery_Commands ; 
+       VCUparameter.Torque_Commands = params.Torque_Commands ; 
+       VCUparameter.InverterCoolingAndHeatingCommands = params.InverterCoolingAndHeatingCommands ; 
+       VCUparameter.MCU_Motor_Temperature = params.MCU_Motor_Temperature ; 
+       VCUparameter.MCU_Motor_Speed = params.MCU_Motor_Speed ; 
+       VCUparameter.MCU_Motor_Power_Limits = params.MCU_Motor_Power_Limits ; 
+       VCUparameter.ABS_Wheel_Speed = params.ABS_Wheel_Speed ; 
+       VCUparameter.BMS_Peak_Current = params.BMS_Peak_Current ; 
+       VCUparameter.VCU_Torque_Request = params.VCU_Torque_Request ; 
+       VCUparameter.ABS_Braking_Torque_split = params.ABS_Braking_Torque_split ; 
+       VCUparameter.ABS_traction_Stability_torque_request = params.ABS_traction_Stability_torque_request ; 
+       VCUparameter.Accel_Pedal_Position = params.Accel_Pedal_Position ; 
+       VCUparameter.Brake_Pressure = params.Brake_Pressure ; 
+       VCUparameter.VCUPGN = params.VCUPGN ; 
+       VCUparameter.VCUSPNs = params.VCUSPNs ; 
+        
     }
 
     private void checkReceivedSubscriptions() {
@@ -145,50 +106,37 @@ String VCUSPNs = params.VCUSPNs;
     public void Torque_request ()
     
     {
-    	
-    	
 	    int length = 10;
 	    boolean useLetters = true;
 	    boolean useNumbers = false;
 	    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-	    
-    	Motor_Torque= generatedString;
+	    VCUparameter.Torque_Commands= generatedString;
 	}
     
     
     public void Regen_torque_demand ()
 
     {
-    	
-    	
-    	
+    		
 
 	}
     
+  
     
     
+    public void AV_Log()
     
+    {
+    String MCU_VCU_Message1 =  " MCU Sense Speed : " + VCUparameter.MCU_Motor_Speed + " & current time is  " + currentTime + "  message time is " + VCUparameter.ST1 +  " case " + (int)VCUparameter.ST1 % 10 ;
+    log.info(MCU_VCU_Message1);
+    String MCU_VCU_Message2 =  " MCU Power Limit : " + VCUparameter.MCU_Motor_Power_Limits + " & current time is  " + currentTime + "  message time is " + VCUparameter.ST1 +  " case " + (int)VCUparameter.ST1 % 10 ;
+    log.info(MCU_VCU_Message2);
+    String BMS_VCU_Message =  " BMS Power limit  : BMS_Peak_Current : " + VCUparameter.BMS_Peak_Current + " & current time is  " + currentTime+ " AMP & message time is " + VCUparameter.ST3 +  " case " + (int)VCUparameter.ST3 % 10 ;
+    log.info(BMS_VCU_Message);	     
+    String ABS_traction_Stability_torque_request_Message =  "ABS Speed : " + VCUparameter.ABS_Wheel_Speed + "  ABS_traction_Stability_torque_request : " + VCUparameter.ABS_traction_Stability_torque_request + " & current time is  " + currentTime+ "  message time is " + VCUparameter.ST7 +  " case " +(int)VCUparameter.ST7 % 10 ;
+    log.info(ABS_traction_Stability_torque_request_Message);  	           
+
     
-    public void Build_and_Send_CAN_Frame(String pgn, String spn){
-    VcuCAN.set_11BiD(placeholder);
-    VcuCAN.set_18BiD(pgn);
-    VcuCAN.set_ACKslot(true);
-    VcuCAN.set_CRC(placeholder);
-    VcuCAN.set_DLC(placeholder);
-    VcuCAN.set_DataField(spn);
-    VcuCAN.set_EndOfFrame(placeholder);
-    VcuCAN.set_IDE(placeholder);
-    VcuCAN.set_IFS(placeholder);
-    VcuCAN.set_RTR(true);
-    VcuCAN.set_ReservedBit1(true);
-    VcuCAN.set_ReservedBit2(true);
-    VcuCAN.set_SRR(true);
-    VcuCAN.set_StartOfFrame(true);
-   
-    
-    /* Publishing the CAN Frame */
-     	
-    VcuCAN.updateAttributeValues(getLRC(), currentTime + getLookAhead());
     }
     
     
@@ -203,22 +151,41 @@ String VCUSPNs = params.VCUSPNs;
     
     
     
-//    public void show_wheel_speed()
-//    
-//    {
-//    	 log.info("ABS_Wheel_Speed "+ABS_Wheel_Speed + " currenttime " + currentTime +" dataTime " + ST2);
-//    }
-//    
+    
+    
+    public String Build_SPN()
+    
+    {
+ 	   return VCUparameter.VCUSPNs= VCUparameter.Motor_Operating_Mode + " " + VCUparameter.Motor_Torque + " " +VCUparameter.Motor_Speed + " " + VCUparameter.Volt_Cmd+ " " + VCUparameter.Contactor_Override_Commands+ " " + VCUparameter.Battery_Commands+ " " + VCUparameter.Torque_Commands +" "+VCUparameter.InverterCoolingAndHeatingCommands ;
+    }
+    
+    
+    
+    public void Build_and_Send_CAN_Frame(String pgn, String spn){
+    VcuCAN.set_11BiD(VCUparameter.placeholder);
+    VcuCAN.set_18BiD(pgn);
+    VcuCAN.set_ACKslot(true);
+    VcuCAN.set_CRC(VCUparameter.placeholder);
+    VcuCAN.set_DLC(VCUparameter.placeholder);
+    VcuCAN.set_DataField(spn);
+    VcuCAN.set_EndOfFrame(VCUparameter.placeholder);
+    VcuCAN.set_IDE(VCUparameter.placeholder);
+    VcuCAN.set_IFS(VCUparameter.placeholder);
+    VcuCAN.set_RTR(true);
+    VcuCAN.set_ReservedBit1(true);
+    VcuCAN.set_ReservedBit2(true);
+    VcuCAN.set_SRR(true);
+    VcuCAN.set_StartOfFrame(true);
+    VcuCAN.updateAttributeValues(getLRC(), currentTime + getLookAhead());
+    }
+    
+        
     private void execute() throws Exception {
         if(super.isLateJoiner()) {
             log.info("turning off time regulation (late joiner)");
             currentTime = super.getLBTS() - super.getLookAhead();
             super.disableTimeRegulation();
         }
-
-        /////////////////////////////////////////////
-        // TODO perform basic initialization below //
-        /////////////////////////////////////////////
 
         AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
         putAdvanceTimeRequest(atr);
@@ -228,10 +195,6 @@ String VCUSPNs = params.VCUSPNs;
             readyToPopulate();
             log.info("...synchronized on readyToPopulate");
         }
-
-        ///////////////////////////////////////////////////////////////////////
-        // TODO perform initialization that depends on other federates below //
-        ///////////////////////////////////////////////////////////////////////
 
         if(!super.isLateJoiner()) {
             log.info("waiting on readyToRun...");
@@ -246,121 +209,36 @@ String VCUSPNs = params.VCUSPNs;
             atr.requestSyncStart();
             enteredTimeGrantedState();
             
-            
-            /* Listening on the CAN-BUS and processing messages of interest */
-            
-            /* behavior and formulas block */
-            
-            Motor_Operating_Mode="0"; 
-            Motor_Speed="0"; 
-            Volt_Cmd="0"; 
-            Contactor_Override_Commands="0"; 
-            Battery_Commands="0"; 
-            Torque_Commands="ABCD"; 
-            InverterCoolingAndHeatingCommands="0"; 
-            
-            
-         //SPN aggregation : For now We suppose all SPNs coming from a single Federate have the same PGN, to be modified when the right PGNs are described.
-            
-          
-                 
-           
-         //  VCUSPNs = Motor_Operating_Mode + Motor_Torque + Motor_Speed + Volt_Cmd +  Contactor_Override_Commands + Battery_Commands +Torque_Commands + InverterCoolingAndHeatingCommands  ;
-             
-             VCUSPNs =Motor_Operating_Mode + " " + Motor_Torque + " " +Motor_Speed + " " + Volt_Cmd+ " " + Contactor_Override_Commands+ " " + Battery_Commands+ " " + Torque_Commands +" "+InverterCoolingAndHeatingCommands ;
 
-
+            
            
 	 	 	   int osd = (int)currentTime % 10;
 
 	    	   switch (osd)
 	    	   {
-            
 	    	   case 1:
-            
-            checkReceivedSubscriptions();
-            
+           checkReceivedSubscriptions();
+           AV_Log();
            	break;
-           	
-           	
-	    	   case 3:
-	               
+ 	    	   case 3:
 	               checkReceivedSubscriptions();
-	               
+	               AV_Log();
 	              	break;
 	    	   case 5:
-	               
 	               checkReceivedSubscriptions();
-	               
+	               AV_Log();
 	              	break;
 	    	   case 7:
-	               
 	               checkReceivedSubscriptions();
-	               
-	               
+	               AV_Log();
 	              	break;
-           	
-           	
-           	
-           	
-           	
-           	
-           	
-           	
-          //  show_wheel_speed();
-  	 
-          
-
-            ////////////////////////////////////////////////////////////////////////////////////////
-            // TODO objects that must be sent every logical time step
-            //
-           
-            
-	 
-       
 	    	       case 8:
-	    	    	   
-	    	    	   Torque_request ();
-	    	    	   
-	    	             VCUSPNs =Motor_Operating_Mode + " " + Motor_Torque + " " +Motor_Speed + " " + Volt_Cmd+ " " + Contactor_Override_Commands+ " " + Battery_Commands+ " " + Torque_Commands +" "+InverterCoolingAndHeatingCommands ;
-
-
-	    	             Build_and_Send_CAN_Frame(VCUPGN, VCUSPNs);
-	    	    	
+       	    	   Torque_request ();
+       	      	   Build_and_Send_CAN_Frame( VCUparameter.VCUPGN, Build_SPN());
 	    	           break;
-	    	           
-	    	           
+	    	   }	    	   
 
-	    	   }
-	     	 
-	    	   
-String MCU_VCU_Message1 =  " MCU Sense Speed : " + MCU_Motor_Speed + " & current time is  " + currentTime + "  message time is " + ST1 +  " case " + (int)ST1 % 10 ;
-log.info(MCU_VCU_Message1);
-String MCU_VCU_Message2 =  " MCU Power Limit : " + MCU_Motor_Power_Limits + " & current time is  " + currentTime + "  message time is " + ST1 +  " case " + (int)ST1 % 10 ;
-log.info(MCU_VCU_Message2);
-
-String BMS_VCU_Message =  " BMS Power limit  : BMS_Peak_Current : " + BMS_Peak_Current + " & current time is  " + currentTime+ " AMP & message time is " + ST3 +  " case " + (int)ST3 % 10 ;
-log.info(BMS_VCU_Message);
-
-	     
-String ABS_traction_Stability_torque_request_Message =  "ABS Speed : " + ABS_Wheel_Speed + "  ABS_traction_Stability_torque_request : " + ABS_traction_Stability_torque_request + " & current time is  " + currentTime+ "  message time is " + ST7 +  " case " +(int)ST7 % 10 ;
-log.info(ABS_traction_Stability_torque_request_Message);
-
-   	           
-String VCU_Torque_Message =  "VCU_Torque_Request : " + VCU_Torque_Request + " & current time is  " + currentTime+ "  message time is " + ST9 +  " case " +(int)ST9 % 10 ;
-log.info(VCU_Torque_Message);
-	           
-            
-            //
-            //////////////////////////////////////////////////////////////////////////////////////////
-
-
-            ////////////////////////////////////////////////////////////////////////////////////////
-            // TODO break here if ready to resign and break out of while loop
-            ////////////////////////////////////////////////////////////////////////////////////////
-
-
-            if (!exitCondition) {
+   if (!exitCondition) {
                 currentTime += super.getStepSize();
                 AdvanceTimeRequest newATR = new AdvanceTimeRequest(currentTime);
                 putAdvanceTimeRequest(newATR);
@@ -368,72 +246,39 @@ log.info(VCU_Torque_Message);
                 atr = newATR;
             }
         }
-
-        // call exitGracefully to shut down federate
         exitGracefully();
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // TODO Perform whatever cleanups needed before exiting the app
-        ////////////////////////////////////////////////////////////////////////////////////////
     }
-   
     private void handleObjectClass(CAN object) {
-
     	String delims = "[ ]+";
     	String[] CSPNs = object.get_DataField().split(delims);
-    	
+    switch (object.get_18BiD()) {
+   	                case "MCU":  
+   	                	VCUparameter.MCU_Motor_Temperature  =   CSPNs[0];
+   	                	VCUparameter.MCU_Motor_Speed        =   CSPNs[1];
+   	                	VCUparameter.MCU_Motor_Power_Limits =   CSPNs[2];  
+   	                	VCUparameter.ST1=object.getTime();
+   	                	VCUparameter.ST2=object.get_DataField_time();
 
-    	
-    	        switch (object.get_18BiD()) {
-    	                
-    	                case "MCU":  
-    	            
-    	            	MCU_Motor_Temperature  =   CSPNs[0];
-    	            	MCU_Motor_Speed        =   CSPNs[1];
-    	            	MCU_Motor_Power_Limits =   CSPNs[2];  
-    	            	
-    	            	ST1=object.getTime();
-    	            	ST2=object.get_DataField_time();
-    	            	sendCondition = true;
-    	            	
     	            	break;     //   case 1:
-    	                     
-    	                        
-    	            case "ABS":  
-    	            	
-    	            	
-    	            	ABS_Wheel_Speed               = CSPNs[0];
-    	            	
-    	            	ABS_traction_Stability_torque_request      = CSPNs[3];
-    	            	
-    	            	ST7=object.getTime();
-    	            	ST8=object.get_DataField_time();
-    	            	
+                   case "ABS":  
+                	   VCUparameter.ABS_Wheel_Speed               = CSPNs[0];
+                	   VCUparameter.ABS_traction_Stability_torque_request      = CSPNs[3];
+                	   VCUparameter.ST7=object.getTime();
+                	   VCUparameter.ST8=object.get_DataField_time();
     	                break;  
-    	        
     	            case "BMS":
-    	        
-    	            	BMS_Peak_Current      = CSPNs[7];
-    	            	ST3=object.getTime();
-    	            	ST4=object.get_DataField_time();
-	                    
-    	            	break;  
-    	            	
-    	             	
-    	            case "VCU":
-    	    	        
-    	            	VCU_Torque_Request      = CSPNs[1];
-    	            	ST9=object.getTime();
-    	            	ST10=object.get_DataField_time();
-    	        
-    	        
+    	            	VCUparameter.BMS_Peak_Current      = CSPNs[7];
+    	            	VCUparameter.ST3=object.getTime();
+    	            	VCUparameter.ST4=object.get_DataField_time();
+    	            	break;  	
+
     	        }
     }
 
     public static void main(String[] args) {
         try {
             FederateConfigParser federateConfigParser = new FederateConfigParser();
-            FederateConfig federateConfig = federateConfigParser.parseArgs(args, VCUConfig.class);
+            VCUConfig federateConfig = federateConfigParser.parseArgs(args, VCUConfig.class);
             VCU federate = new VCU(federateConfig);
             federate.execute();
             log.info("Done.");

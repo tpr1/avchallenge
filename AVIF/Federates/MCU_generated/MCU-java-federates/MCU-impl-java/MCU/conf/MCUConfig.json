@@ -4,5 +4,16 @@
   "federationId": "AV",
   "isLateJoiner": false,
   "lookAhead": 0.2,
-  "stepSize": 1.0
+  "stepSize": 1.0,
+  "ST1":0.0,
+  "ST2":0.0,
+  "Engine_Speed":"0",       
+  "Engine_Temperature":"0",
+  "Motor_Power_Limits":"0",  
+  "Inverter_Temperature":"0", 
+  "VCU_Torque_Commands" : "0",
+  "Motor_Speed":"0",
+  "MCUPGN" : "MCU",
+  "placeholder" : "0",
+  "MCUSPNs" : "0"
 }

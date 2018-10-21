@@ -21,21 +21,21 @@ public class BMSConfig extends FederateConfig {
     
     // J1931-71 compliant local Messages
     @FederateParameter
-    public String Peak_Voltage="0";         // pgn ?  SPN ? 
+    public String Peak_Voltage;         // pgn ?  SPN ? 
     @FederateParameter
-    public String Peak_Current="0";   // pgn ? SPN ? 
+    public String Peak_Current;   // pgn ? SPN ? 
     @FederateParameter
-    public String State_Of_Charge="0";   // pgn ?    SPN ?
+    public String State_Of_Charge;   // pgn ?    SPN ?
     @FederateParameter
-    public String State_Of_Health="0";  // pgn ?    SPN ? 
+    public String State_Of_Health;  // pgn ?    SPN ? 
     @FederateParameter
-    public String Remaining_Capacity="0";  // pgn ?    SPN ? 
+    public String Remaining_Capacity;  // pgn ?    SPN ? 
     @FederateParameter
-    public String Max_Temperature="0";
+    public String Max_Temperature;
     @FederateParameter
-    public String Min_Temperature="0";
+    public String Min_Temperature;
     @FederateParameter
-    public String Peak_Current_Limit="0";
+    public String Peak_Current_Limit;
    
     
     // J1931-71 compliant external Messages
@@ -45,14 +45,19 @@ public class BMSConfig extends FederateConfig {
     // PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
     
     @FederateParameter
-    public String BMSPGN = "BMS";
+    public String BMSPGN;
     
+   
     // SPNs 
     @FederateParameter
-    public String BMSSPNs = "0";
+    public String BMSSPNs ;
     
     
    // String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge + State_Of_Health +  Remaining_Capacity + Max_Temperature +Min_Temperature + Peak_Current_Limit  ;
+    
+    
+    @FederateParameter
+    public String placeholder;
     
     
     

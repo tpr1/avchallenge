@@ -17,46 +17,33 @@ public class MCUConfig extends FederateConfig {
      * ABS Measured Wheel Speed.
      */
 
-
-    
+    @FederateParameter
+    public double ST1 ;
+    @FederateParameter
+    public double ST2 ;
     // J1931-71 compliant local Messages
-    
-    // J1931-71 compliant local Messages
 	@FederateParameter
-    public String Engine_Speed="0";         // pgn61444 SPN190
+    public String Engine_Speed;         // pgn61444 SPN190
 	@FederateParameter
-	public String Engine_Temperature="0";   // pgn65262 SPN110
+	public String Engine_Temperature;   // pgn65262 SPN110
 	@FederateParameter
-	public String Motor_Power_Limits="0";   // pgn ?    SPN ?
+	public String Motor_Power_Limits;   // pgn ?    SPN ?
 	@FederateParameter
-	public String Inverter_Temperature="0"; // pgn ?    SPN ? 
-    
+	public String Inverter_Temperature; // pgn ?    SPN ? 
     // J1931-71 compliant external Messages
-   
-    
 	@FederateParameter
-	public String  VCU_Torque_Commands = "0";
-    
-    
+	public String  VCU_Torque_Commands ;
+	@FederateParameter
+	public String  placeholder ;
    // Messages sent/received to/from actuators/sensors
-    
 	@FederateParameter
-	public String Motor_Speed="0"; // see graph in slide 3
-    
+	public String Motor_Speed; // see graph in slide 3
    // PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
-    
 	@FederateParameter
-	public String MCUPGN = "MCU";
-    
-    
+	public String MCUPGN ;
     // SPNs aggregation : We suppose all SPNs have the same PGN so far, to be modified when the right PGNs are described.
-    
 	@FederateParameter
-	public String MCUSPNs = "0";
-    
-    
-   // String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge + State_Of_Health +  Remaining_Capacity + Max_Temperature +Min_Temperature + Peak_Current_Limit  ;
-    
-    
-    
+	public String MCUSPNs ; 
+
+   // String BMSSPNs = Peak_Voltage + Peak_Current + State_Of_Charge + State_Of_Health +  Remaining_Capacity + Max_Temperature +Min_Temperature + Peak_Current_Limit  ; 
 }

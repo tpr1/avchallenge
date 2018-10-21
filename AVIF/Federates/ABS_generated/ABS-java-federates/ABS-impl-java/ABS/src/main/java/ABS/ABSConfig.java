@@ -16,27 +16,33 @@ public class ABSConfig extends FederateConfig {
     /**
      * ABS Measured Wheel Speed.
      */
+	@FederateParameter
+    public String placeholder;
     @FederateParameter
-    public String Wheel_Speed="35";
+    public double ST;
     @FederateParameter
-    public String ABS_Event_Status="0";   // pgn ?    SPN ?
+    public String Wheel_Speed;
+    @FederateParameter
+    public String ABS_Event_Status;   // pgn ?    SPN ?
     // J1931-71 NON-compliant local Messages
     @FederateParameter
-    public String Traction_Stability_Torque_Request="0";   
+    public String Traction_Stability_Torque_Request;   
     // J1931-71 compliant external Messages : (ExtrenalEntity_Message)
     @FederateParameter
-    public String VCU_Motor_Torque = "0"; 
+    public String VCU_Motor_Torque; 
     @FederateParameter
-    public String VCU_PGN = "0";
+    public String VCU_PGN ;
    // Messages sent/received to/from actuators/sensors
     @FederateParameter
-    public String Wheel_Speed_Sensors="0"; // see graph i`n slide 3
+    public String Wheel_Speed_Sensors; // see graph i`n slide 3
     @FederateParameter
-    public String Hydraulic_Valve_Commands="0"; // see graph in slide 3
+    public String Hydraulic_Valve_Commands; // see graph in slide 3
    // PGN : multiple PGNs per Federate are possible. we use the Federate name as a placeholder for now.
     @FederateParameter
-    public  String ABSPGN = "ABS";
+    public  String ABSPGN;
    // SPNs 
     @FederateParameter
-    public String ABSSPNs =   "0";
+    public String ABSSPNs; 
+    @FederateParameter
+    public String Vehicle_Speed;
 }

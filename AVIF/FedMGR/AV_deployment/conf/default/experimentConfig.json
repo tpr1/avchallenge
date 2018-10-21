@@ -42,6 +42,10 @@
       "count": 0
     },
     {
+      "federateType": "Database",
+      "count": 0
+    },
+    {
       "federateType": "VCU",
       "count": 0
     }
