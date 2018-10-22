@@ -159,7 +159,7 @@ public class ABS extends ABSBase {
    
 // [1]  call an instance of the config file. This instance will be called each time we want to update / initializa our variables.
 
-        public ABSConfig ABSparameter = new ABSConfig();
+        public ABSConfig ABSparameter;
 
 // [2]     create an instance of the CAN object. 
 
@@ -177,18 +177,7 @@ public class ABS extends ABSBase {
 // [5] initialize the parameters. 
 
               
-         ABSparameter.placeholder= params.placeholder;  
-         ABSparameter.ST= params.ST;
-         ABSparameter.Wheel_Speed= params.Wheel_Speed;
-         ABSparameter.ABS_Event_Status= params.ABS_Event_Status; 
-         ABSparameter.Traction_Stability_Torque_Request= params.Traction_Stability_Torque_Request;   
-         ABSparameter.VCU_Motor_Torque= params.VCU_Motor_Torque; 
-         ABSparameter.VCU_PGN = params.VCU_PGN;
-         ABSparameter.Wheel_Speed_Sensors= params.Wheel_Speed_Sensors; 
-         ABSparameter.Hydraulic_Valve_Commands= params.Hydraulic_Valve_Commands;
-         ABSparameter.ABSPGN= params.ABSPGN;  
-         ABSparameter.ABSSPNs= params.ABSSPNs; 
-         ABSparameter.Vehicle_Speed= params.Vehicle_Speed;
+         ABSparameter = params;
          
     }
 
